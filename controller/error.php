@@ -31,6 +31,9 @@ class ErrorMsg{
     const NOPERMISSION      = 20022;//没有权限操作
     const VOTEED            = 20023;//已经点赞过
     const COMMENTED         = 20024;//已经评论过了
+    const NOQUESTION        = 20025;//没有该问题
+    const NOTOPIC           = 20016;//没有该话题
+    const ANSWERED          = 20017;//已经回答过了
 
 
     static $msg = array(
@@ -59,6 +62,9 @@ class ErrorMsg{
         self::NOPERMISSION     => '无权限操作',
         self::VOTEED           => '已经点赞过',
         self::COMMENTED        => '已经评论过了',
+        self::NOQUESTION       => '没有该问题',
+        self::NOTOPIC          => '没有该话题',
+        self::ANSWERED         => '已经回答过该问题了',
     );
 
 

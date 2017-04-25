@@ -75,6 +75,21 @@ class Model {
 	}
 
 	/**
+	 * 执行sql语句
+	 * @param $sql
+	 * @return bool
+	 */
+	public function querySql($sql) {
+		if (empty($sql)) {
+			return false;
+		}
+		$this->slaveConn();
+		$res = $this->_sdb->query($sql,MYSQLI_USE_RESULT);
+
+		return $res;
+	}
+
+	/**
 	 * 查询
 	 * @param string $sql 查询语句
 	 * @return 成功返回结果
@@ -166,7 +181,7 @@ class Model {
 		}
 		$addArr = $this->handleString($addArr);
 		$this->masterConn();
-		$sql = "INSERT INTO " .$tbname . " (" . implode(' , ', array_flip($addArr)) . ") VALUES(" . implode(' , ', $addArr) . ")";
+		$sql = "INSERT INTO " . $tbname . " (" . implode(' , ', array_keys($addArr)) . ") VALUES(" . implode(' , ', $addArr) . ")";
 		$res = $this->_mdb->query($sql);
 		if (false === $res) {
 			return false;

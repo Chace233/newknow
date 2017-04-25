@@ -67,4 +67,34 @@ class controllerBase {
         return true;
     }
 
+    /*
+     * redis连接
+     */
+    public function pConnect() {
+        $redis = new Redis();
+        $redis->pconnect('127.0.0.1', 6379);
+        return $redis;
+    }
+
+    /**
+     * 请求队列
+     * @param $key
+     * @param $value
+     */
+    public function requestHander($key, $value) {
+        $redis = $this->pConnect();
+        $redis->lPush($key, $value);
+    }
+
+    /**
+     * 获取队列值
+     * @param $key
+     * @return string
+     */
+    public function getHander($key) {
+        $redis = $this->pConnect();
+        $data = $redis->rPop($key);
+        return $data;
+    }
+
 }
